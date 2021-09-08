@@ -9,10 +9,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MonsterDBConnect implements DBConnect {
-	private final String URL = "jdbc:postgresql://localhost:5432/monster";
-	private final String USER = "postgres";
-	private final String PASSWORD = "test";
+	private  String URL ;
+	private  String USER ;
+	private  String PASSWORD ;
 	List<String> monsterData = new ArrayList<>();
+
+	public MonsterDBConnect(String[] args) {
+		this.URL = args[0];
+		this.USER = args[1];
+		this.PASSWORD = args[2];
+	}
 
 	//DBからMonsterのデータを取得
 	public List getMonsterData(int i) {

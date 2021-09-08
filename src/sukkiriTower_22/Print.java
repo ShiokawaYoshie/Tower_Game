@@ -63,8 +63,7 @@ public class Print {
 
 	}
 
-	public int choiceHero() {
-		HeroDBConnect hdbc = new HeroDBConnect();
+	public int choiceHero(HeroDBConnect hdbc) {
 		System.out.println("使用する勇者の一覧を表示します。");
 		List<String> heroName = hdbc.getHeroInfo();
 		for(int i = 1; i <= heroName.size(); i++ ) {
@@ -84,8 +83,8 @@ public class Print {
 
 	}
 
-	public void printMonsterInfo() {
-		MonsterDBConnect mdbc = new MonsterDBConnect();
+	public void printMonsterInfo(String[] args) {
+		MonsterDBConnect mdbc = new MonsterDBConnect(args);
 		System.out.println("現在登録されているモンスターの一覧を表示します。");
 		List<String> monsterInfo = mdbc.getMonsterInfo();
 		for(int i = 0; i < monsterInfo.size(); i++ ) {

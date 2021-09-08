@@ -9,10 +9,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HeroDBConnect implements DBConnect {
-	private final String URL = "jdbc:postgresql://localhost:5432/monster";
-	private final String USER = "postgres";
-	private final String PASSWORD = "test";
+	private  String URL ;
+	private  String USER ;
+	private  String PASSWORD;
 	List<String> heroData = new ArrayList<>();
+
+	public HeroDBConnect(String[] args) {
+		this.URL = args[0];
+		this.USER = args[1];
+		this.PASSWORD = args[2];
+	}
 
 	//DBにあるHeroの情報をインスタンスにセットするメソッド
 	public List getHeroData(int i) {

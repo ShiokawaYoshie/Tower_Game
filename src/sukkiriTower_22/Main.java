@@ -7,6 +7,7 @@ import java.util.Scanner;
 public class Main {
 	public static void main(String[] args) {
 
+
 		int count = 0;
 		System.out.println("★☆スッキリタワー☆★");
 		System.out.println("1：ゲームスタート");
@@ -29,7 +30,7 @@ public class Main {
 			List<List<String>> allHero;//複数のHeroインスタンスが入るList
 
 			//ヒーローの作成
-			HeroDBConnect hdbc = new HeroDBConnect();
+			HeroDBConnect hdbc = new HeroDBConnect(args);
 			OperationProperties op = new OperationProperties();
 			hdbc.clearTable(); //tableデータを消去
 			allHero = op.getProperties(hdbc);//Listに戻り値を格納
@@ -41,7 +42,7 @@ public class Main {
 				register.RegisterDB(a, hdbc);//DBに登録
 			}
 
-			int heroChoice =  p.choiceHero();//HeroをUserが選ぶ
+			int heroChoice =  p.choiceHero(hdbc);//HeroをUserが選ぶ
 			hd = hdbc.getHeroData(heroChoice);// Heroの情報をListに代入
 			Hero h = register.RegisterHero(hd); //Heroインスタンスを作る
 			ResultOutput ro = new ResultOutput(h); //text出力用のインスタンスを作成
@@ -51,7 +52,7 @@ public class Main {
 				count++;
 
 				//モンスターの作成
-				MonsterDBConnect mdbc = new MonsterDBConnect();
+				MonsterDBConnect mdbc = new MonsterDBConnect(args);
 				md = mdbc.getMonsterData(count);
 
 				if(md.size() == 0) { //MonsterのデータがDBから受け取れなかったら
@@ -108,13 +109,13 @@ public class Main {
 			OperationCSV ocsv = new OperationCSV();
 			System.out.println("取り込むCSVファイルのパスを入力してください。");
 			String pass = new Scanner(System.in).nextLine();
-			ocsv.readCSV(pass);
+			ocsv.readCSV(pass, args);
 
 			break;
 
 		case 3://MonsterDBに追加でMonsterを登録
 			boolean ans = true;//while文を抜ける際の処理
-			p.printMonsterInfo();
+			p.printMonsterInfo(args);
 			while(ans) {
 				System.out.println("登録するモンスターの情報を入力してください");
 				System.out.print("登録IDを半角数字で入力してください。＞＞");
@@ -141,7 +142,7 @@ public class Main {
 				System.out.print("登録する経験値を半角数字で入力してください。＞＞");
 				int  experiencePoint = new Scanner(System.in).nextInt();
 
-				MonsterDBConnect db = new MonsterDBConnect();
+				MonsterDBConnect db = new MonsterDBConnect(args);
 				db.setCharacterDate(id, name, hp, mp, power, defense, specialPower, experiencePoint);
 
 				System.out.println("更にモンスターを登録しますか？");

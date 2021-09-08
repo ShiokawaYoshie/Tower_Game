@@ -10,10 +10,10 @@ import java.util.List;
 public class OperationCSV {
 
 	//csvファイルからデータの読み込み
-	public void readCSV(String pass){
+	public void readCSV(String pass, String[] args){
 		FileReader fr = null;
 		BufferedReader br = null;
-		MonsterDBConnect mdbc = new MonsterDBConnect();
+		MonsterDBConnect mdbc = new MonsterDBConnect(args);
 
 		mdbc.clearTable();
 
